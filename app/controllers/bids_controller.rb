@@ -6,7 +6,7 @@ class BidsController < ApplicationController
   end
 
   def create
-    @bid = Bid.create(Bid_params)
+    @bid = Bid.create(bid_params)
     # byebug
     if @bid.valid?
       render json: { bid: BidSerializer.new(@bid) }, status: :created
