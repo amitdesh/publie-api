@@ -24,13 +24,18 @@ class ApplicationController < ActionController::API
 
   def current_user
     if decoded_token
-      user_id = decoded_token[0]['user_id']
-      @user = if Seller.find_by(id: user_id)
-                User.find_by(id: user_id)
-              else
-                Buyer.find_by(id: user_id)
-              end
+      if decoded_token[0]['seller_id']
+        user_id = decoded_token[0]['seller_id']
+      else
+        user_id = decoded_token[0]['buyer_id']
+      end
+      if Seller.find_by(id: user_id)
+        @user = Seller.find_by(id: user_id)
+      else
+        @user = Buyer.find_by(id: user_id)
+      end
     end
+    return @user
   end
 
   def logged_in?
