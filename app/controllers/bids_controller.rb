@@ -16,7 +16,7 @@ class BidsController < ApplicationController
   end
 
   def update
-    @id = Bid.find(params[:id])
+    @bid = Bid.find(params[:id])
     @bid.update(bid_params)
     render json: { bid: BidSerializer.new(@bid) }, status: :created
   end
