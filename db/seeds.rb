@@ -21,6 +21,6 @@ seller1 = Seller.create(email_address: 'amit@seller.com', password: 'hello', fir
 business1 = Business.create(name: 'Testing', location: 'Testing', founder_name: 'Tom Son', industry: 'TMT', biz_type: 'Institutional', employees: 100, revenue: 30_000, description: 'Works with Tech', seller_id: seller1.id)
 business2 = Business.create(name: 'Testing2', location: 'Testing2', founder_name: 'Tom Son2', industry: 'TMT', biz_type: 'Institutional', employees: 100, revenue: 30_000, description: 'Works with Tech', seller_id: seller1.id)
 bid1 = Bid.create(buyer_id: buyer1.id, business_id: business1.id, bid_price: 1_000_000, closing_timeline: 30, cash_consid: 0.8, eq_consid: 0.2, winning_bid: false)
-bid2 = Bid.create(buyer_id: buyer2.id, business_id: business1.id, bid_price: 1_000_000, closing_timeline: 30, cash_consid: 0.8, eq_consid: 0.2, winning_bid: false)
+bid2 = Bid.create(buyer_id: buyer2.id, business_id: business1.id, bid_price: 5_000_000, closing_timeline: 30, cash_consid: 0.8, eq_consid: 0.2, winning_bid: false)
 
 puts 'Done seeding database with test seeds'
