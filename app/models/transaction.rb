@@ -1,5 +1,6 @@
 class Transaction < ApplicationRecord
   belongs_to :buyer
   belongs_to :seller
-  has_one :bid
+  belongs_to :bid
+  belongs_to :business
 end

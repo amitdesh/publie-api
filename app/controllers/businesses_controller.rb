@@ -10,7 +10,7 @@ class BusinessesController < ApplicationController
     @business = Business.create(business_params)
     # byebug
     if @business.valid?
-      render json: { Business: BusinessSerializer.new(@business) }, status: :created
+      render json: @business, status: :created
     else
       render json: { error: 'Unable to create new business. Please try again.' }, status: :not_acceptable
     end
