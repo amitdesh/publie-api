@@ -1,9 +1,9 @@
 class SellersController < ApplicationController
-  skip_before_action :authorized, only: [:create]
+  # skip_before_action :authorized, only: [:create]
   def index
     @sellers = Seller.all
 
-    render json: @sellers
+    render json: @sellers.with_attached_image
   end
 
   def profile
@@ -11,11 +11,13 @@ class SellersController < ApplicationController
   end
 
   def create
+    byebug
     @seller = Seller.create(seller_params)
-    # byebug
+    @seller.profile_picture.attach(params[:seller][:profile_picture])
+    picture_url = url_for(@seller.profile_picture)
     if @seller.valid?
       @token = encode_token(seller_id: @seller.id)
-      render json: { seller: @seller, jwt: @token }, status: :created
+      render json: { seller: @seller, jwt: @token, picture: picture_url }, status: :created
     else
       render json: { error: 'Unable to create new profile. Please try again.' }, status: :not_acceptable
     end
@@ -36,6 +38,6 @@ class SellersController < ApplicationController
   private
 
   def seller_params
-    params.require(:seller).permit(:email_address, :password, :first_name, :last_name, :prof_pic)
+    params.require(:seller).permit(:email_address, :password, :first_name, :last_name, :prof_pic, :profile_picture)
   end
 end

@@ -8,7 +8,7 @@ class BuyerauthController < ApplicationController
     if @buyer&.authenticate(buyer_login_params[:password])
       # encode token comes from ApplicationController
       token = encode_token({ buyer_id: @buyer.id })
-      render json: { buyer: BuyerSerializer.new(@buyer), jwt: token }, status: :accepted
+      render json: { buyer: BuyerSerializer.new(@buyer), jwt: token , picture: picture_url }, status: :accepted
     else
       render json: { message: 'Invalid email or password' }, status: :unauthorized
     end
