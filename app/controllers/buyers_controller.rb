@@ -3,7 +3,7 @@ class BuyersController < ApplicationController
   def index
     @buyers = Buyer.all
 
-    render json: @buyers
+    render json: @buyers.with_attached_image
   end
 
   def profile
@@ -12,10 +12,12 @@ class BuyersController < ApplicationController
 
   def create
     @buyer = Buyer.create(buyer_params)
+    @buyer.profile_pic.attach(params[:buyer][:profile_pic])
+    picture_url = url_for(@buyer.profile_pic)
     # byebug
     if @buyer.valid?
       @token = encode_token(buyer_id: @buyer.id)
-      render json: { buyer: BuyerSerializer.new(@buyer), jwt: @token }, status: :created
+      render json: { buyer: BuyerSerializer.new(@buyer), jwt: @token, picture: picture_url }, status: :created
     else
       render json: { error: 'Unable to create new profile. Please try again.' }, status: :not_acceptable
     end
@@ -36,6 +38,6 @@ class BuyersController < ApplicationController
   private
 
   def buyer_params
-    params.require(:buyer).permit(:email_address, :password, :first_name, :last_name, :company_name, :aum, :prof_pic, :industry, :profile_picture)
+    params.require(:buyer).permit(:email_address, :password, :first_name, :last_name, :company_name, :aum, :prof_pic, :industry, :profile_pic)
   end
 end

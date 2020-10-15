@@ -1,5 +1,5 @@
 class SellersController < ApplicationController
-  # skip_before_action :authorized, only: [:create]
+  skip_before_action :authorized, only: [:create]
   def index
     @sellers = Seller.all
 
@@ -17,7 +17,7 @@ class SellersController < ApplicationController
     picture_url = url_for(@seller.profile_picture)
     if @seller.valid?
       @token = encode_token(seller_id: @seller.id)
-      render json: { seller: @seller, jwt: @token, picture: picture_url }, status: :created
+      render json: { seller: SellerSerializer.new(@seller), jwt: @token, picture: picture_url }, status: :created
     else
       render json: { error: 'Unable to create new profile. Please try again.' }, status: :not_acceptable
     end
