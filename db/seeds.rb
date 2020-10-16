@@ -12,6 +12,7 @@ Buyer.delete_all
 Seller.delete_all
 Business.delete_all
 Bid.delete_all
+Transaction.delete_all
 
 puts 'Seeding database with new seeds'
 
