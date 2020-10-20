@@ -1,6 +1,6 @@
 class BuyerSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  attributes :id, :email_address, :first_name, :last_name, :company_name, :aum, :prof_pic, :industry, :profile_pic
+  attributes :id, :email_address, :first_name, :last_name, :company_name, :aum, :industry, :profile_pic
   has_many :bids
   has_many :businesses, through: :bids
 

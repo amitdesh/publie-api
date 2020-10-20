@@ -1,6 +1,6 @@
 class SellerSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  attributes :id, :email_address, :first_name, :last_name, :prof_pic, :profile_picture
+  attributes :id, :email_address, :first_name, :last_name, :profile_picture
   has_many :businesses
   has_many :bids, through: :businesses
 
