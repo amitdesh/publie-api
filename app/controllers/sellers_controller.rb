@@ -14,7 +14,7 @@ class SellersController < ApplicationController
     @seller = Seller.create(seller_params)
     @seller.profile_picture.attach(params[:seller][:profile_picture])
     picture_url = url_for(@seller.profile_picture)
-    byebug
+    # byebug
     if @seller.valid?
       @token = encode_token(seller_id: @seller.id)
       render json: { seller: SellerSerializer.new(@seller), jwt: @token, picture: picture_url }, status: :created

@@ -8,7 +8,7 @@ class BusinessesController < ApplicationController
   end
 
   def create
-    byebug
+    # byebug
     @business = Business.create(business_params)
     # pictures = (params[:business][:biz_pictures])
     # byebug
@@ -16,7 +16,7 @@ class BusinessesController < ApplicationController
     # end
     @business.biz_picture.attach(params[:business][:biz_picture])
     picture_url = url_for(@business.biz_picture)
-    byebug
+    # byebug
     # picture_url = url_for(@business.biz_pictures)
     # @business.biz_pictures.each do |pics|
     #   picture_url << url_for(pics)
